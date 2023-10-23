@@ -5,7 +5,7 @@ const initialContribution = 1200
 const initialExpectedReturn = 7
 const initialDuration = 10
 
-export default function UserInput() {
+export default function UserInput(props) {
 
   const [currentSavings, setCurrentSavings] = useState(initialCurrentSavings)
   const [yearlyContribution, setYearlyContribution] = useState(initialContribution)
@@ -34,10 +34,16 @@ export default function UserInput() {
   }
   
   const submitHandler = (event) => {
-    event.preventDefault()
-    // console.log('SUMBIT');
-    //..
-  }
+    event.preventDefault();
+    let userInput = {
+      "current-savings": currentSavings,
+      "yearly-contribution": yearlyContribution,
+      "expected-return": expectedReturn,
+      "duration": duration,
+    };
+    // console.log(userInput);
+    props.onCalculate(userInput)
+  };
 
   return (
     <form className="form" onSubmit={submitHandler}>
